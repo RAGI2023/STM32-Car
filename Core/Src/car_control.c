@@ -17,7 +17,7 @@ car_config_t g_CarConfig =
 car_ctrl_t 	g_CarCtrl;
 
 car_plan_t* g_CarPlan_Ptr;
-const int16_t straight_angle = -5;
+const int16_t straight_angle = -3;
 const uint8_t steer_limit = 90;
 car_plan_t g_CarPlan_Base[] =
 {
@@ -44,16 +44,14 @@ car_plan_t g_CarPlan_Base[] =
 	{ 0  , { 0   , 0  } , 0 , 0 } ,		// stop
 };
 
-car_plan_t g_CarPlan_Supper[] =
+car_plan_t g_CarPlan_Supper1[] =
 {
-	{ 55  , { 0 , 0} , 0 , 100 } ,   		// test sreer moto
-	{ -55  , { 0 , 0} , 0 , 100 } ,  		// test sreer moto
 	
-	{ 17  , { 500 , 500} , 20000 , 100 } ,  	// run 20s with 50mm/s speed straightly or block less than 200mm
-	{ -55  , { 500 , 500} , 0 , 110 } ,		// turn right 1.1s 
+	{ straight_angle  , { 1100 , 1100} , 50000 , 100 } ,  	// run 20s with 50mm/s speed straightly or block less than 200mm
+	{ 55 + straight_angle , { 1100 , 1100} , 0 , 80 } ,		// turn right 1.1s 
 	
-	{ 17  , { 300 , 300} , 0 , 30 } ,		// run 1s with 50mm/s speed straightly
-	{ 17  , { 0 ,  0} , 0 , 100 } ,		// run 1s with 50mm/s speed straightly
+	{ straight_angle  , { 1100 , 1100} , 0 , 10 } ,		// run 1s with 50mm/s speed straightly
+	{ -55 + straight_angle  , { 1100 ,  1100} , 0 , 80 } ,		// run 1s with 50mm/s speed straightly
 	{ 80  , { 200 , 400} , 0 , 150 } ,   // turn left 1.1s 
 	
 	{ 17  , { 100 , 100} , 0 , 30 } ,		// run 1s with 50mm/s speed straightly
@@ -77,10 +75,10 @@ void CarCtrl_Start( void )
 	g_car_ctrl_state = CarCtrl_IDLE ;
 }
 
-void CarCtrl_SuperStart(void)
+void CarCtrl_SuperStart1(void)
 {
 	g_car_ctrl_state = CarCtrl_IDLE ;
-	g_CarPlan_Ptr = g_CarPlan_Supper;
+	g_CarPlan_Ptr = g_CarPlan_Supper1;
 }
 
 void CarCtrl_Stop( void )
