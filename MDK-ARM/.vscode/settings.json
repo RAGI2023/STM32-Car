@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "motor_drive.h": "c",
+        "car_control.h": "c"
+    }
+}

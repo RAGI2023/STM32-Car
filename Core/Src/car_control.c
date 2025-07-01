@@ -20,20 +20,20 @@ car_plan_t* g_CarPlan_Ptr;
 
 car_plan_t g_CarPlan_Base[] =
 {
-	{ 55  , { 0 , 0} , 0 , 100 } ,   		// test steer moto
-	{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
+	//{ 55  , { 0 , 0} , 0 , 100 } ,   		// test steer moto
+	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
-	{ 16  , { 500 , 500} , 0 , 200 } ,  	// run 2s with 500mm/s speed straightly 1m
+	{ 0  , { 500 , 500} , 0 , 200 } ,  	// run 2s with 500mm/s speed straightly 1m
 	{ -55  , { 500 , 500} , 0 , 110 } ,		// turn right 1.1s 
 	
-	{ 16  , { 500 , 500} , 0 , 150 } ,		// run 1.5s with 500mm/s speed straightly
+	{ 0  , { 500 , 500} , 0 , 150 } ,		// run 1.5s with 500mm/s speed straightly
 	{ -55  , { 500 , 500} , 0 , 110 } ,   // turn right 1.1s 
 	
-	{ 16  , { 500 , 500} , 0 , 120 } ,		// run 1.2s with 500mm/s speed straightly
+	{ 0  , { 500 , 500} , 0 , 120 } ,		// run 1.2s with 500mm/s speed straightly
 	{ -55  , { 500 , 500} , 0 , 135 } ,		// turn right 1.35s 
 	
-	{ 16  , { 500 , 500} , 0 , 180 } ,		// run 1.8s with 500mm/s speed straightly
-	{ 16  , { 0   , 0  } , 0 , 0 } ,		// stop
+	{ 0  , { 500 , 500} , 0 , 180 } ,		// run 1.8s with 500mm/s speed straightly
+	{ 0  , { 0   , 0  } , 0 , 0 } ,		// stop
 };
 
 car_plan_t g_CarPlan_Supper[] =
@@ -67,6 +67,12 @@ car_plan_t g_CarPlan_Supper[] =
 void CarCtrl_Start( void )
 {
 	g_car_ctrl_state = CarCtrl_IDLE ;
+}
+
+void CarCtrl_SuperStart(void)
+{
+	g_car_ctrl_state = CarCtrl_IDLE ;
+	g_CarPlan_Ptr = g_CarPlan_Supper;
 }
 
 void CarCtrl_Stop( void )
@@ -233,7 +239,7 @@ void CarCtrl_Show( void )
 	}
 }
 
-// ÔÚ car_control.c ÖÐ
+// ï¿½ï¿½ car_control.c ï¿½ï¿½
 
 void CarCtrl_Process( void )
 {
@@ -247,7 +253,7 @@ void CarCtrl_Process( void )
 		CarCtrl_Speed_PID();
 	
 		scope_send_counter++;
-		if (scope_send_counter >= 10) // 100Hz / 10 = 10Hz ·¢ËÍÆµÂÊ
+		if (scope_send_counter >= 10) // 100Hz / 10 = 10Hz ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½
 		{
 			scope_send_counter = 0;
 			

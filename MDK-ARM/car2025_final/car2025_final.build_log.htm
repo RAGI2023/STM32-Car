@@ -3,115 +3,189 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: a poland, HP Inc., LIC=65ISZ-JY2T8-RANDM-XGE2P-48UHU-YFF4Z
+IDE-Version: ¦ÌVision V5.42.0.0
+Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: gi ra
+bupt
+User-based license: Keil MDK Community (non-commercial free of charge)
+Valid until: Jun 1 2033. Cached until: Jul 7 2025
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.41.0.0
-Toolchain Path:  E:\keil\ARM\v5\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.41.0.0
+Toolchain:       Keil MDK Community (non-commercial free of charge  Version: 5.42.0.0
+Toolchain Path:  C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.23
+Assembler:       Armasm.exe V6.23
+Linker/Locator:  ArmLink.exe V6.23
+Library Manager: ArmAr.exe V6.23
+Hex Converter:   FromElf.exe V6.23
+CPU DLL:         SARMCM3.DLL V5.42.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      CMSIS_AGDI.dll V1.33.21.0
-Dialog DLL:      TCM.DLL V1.56.4.0
+Target DLL:      CMSIS_AGDI.dll V1.33.22.0
+Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
-E:\ide\car\car2025_final\MDK-ARM\car2025_final.uvprojx
-Project File Date:  06/30/2025
+D:\codes\keil\car2025_final\MDK-ARM\car2025_final.uvprojx
+Project File Date:  07/01/2025
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\keil\ARM\v5\Bin'
+*** Using Compiler 'V6.23', folder: 'C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'car2025_final'
-assembling startup_stm32f103xe.s...
-compiling music.c...
-..\Core\Src\music.c(67): warning:  #177-D: variable "counter"  was declared but never referenced
-  	uint32_t counter ;
-..\Core\Src\music.c: 1 warning, 0 errors
-compiling speed_encoder.c...
-..\Core\Src\speed_encoder.c(72): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		sprintf( buf , "L:%d R:%d" , speed[0] , speed[1] );
-..\Core\Src\speed_encoder.c(75): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		sprintf( buf , "L:%d R:%d" , counter[0] , counter[1] );
-..\Core\Src\speed_encoder.c: 2 warnings, 0 errors
-compiling ultrasonicwave.c...
-..\Core\Src\ultrasonicwave.c(105): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		if ( g_ultrawave_data[i].distance < 100 ) sprintf( buf , "%d: -- mm" , i );
-..\Core\Src\ultrasonicwave.c(106): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		else sprintf( buf , "%d: %4.1f mm" , i , g_ultrawave_data[i].distance/100.0 );
-..\Core\Src\ultrasonicwave.c: 2 warnings, 0 errors
-compiling led_show.c...
-compiling car_control.c...
-..\Core\Src\car_control.c(134): warning:  #177-D: variable "p_car_cfg"  was declared but never referenced
-  	car_config_t *p_car_cfg = & g_CarConfig ;
-..\Core\Src\car_control.c(223): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		sprintf( buf , "L:%d R:%d" , speed[0] , speed[1] );
-..\Core\Src\car_control.c(226): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *restrict"
-  		sprintf( buf , "L:%d R:%d" , pwm[0] , pwm[1] );
-..\Core\Src\car_control.c(262): warning:  #1-D: last line of file ends without a newline
-  }
-..\Core\Src\car_control.c: 4 warnings, 0 errors
-compiling user_command.c...
-..\Core\Src\user_command.c(71): warning:  #111-D: statement is unreachable
-  					break;
-..\Core\Src\user_command.c(131): warning:  #111-D: statement is unreachable
-  			break;			
-..\Core\Src\user_command.c(143): warning:  #167-D: argument of type "const uint8_t *" is incompatible with parameter of type "const char *"
-  		if(strncasecmp((const uint8_t *)g_CarCtrlCmd[i].cmd, (const char *)buf, strlen((const char *)g_CarCtrlCmd[i].cmd)) == 0)
-..\Core\Src\user_command.c(260): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
-  	if (strcasecmp( buf , "ID" ) == 0 )
-..\Core\Src\user_command.c(257): warning:  #177-D: variable "tmp"  was declared but never referenced
-    uint8_t tmp[16] ;
-..\Core\Src\user_command.c(259): warning:  #177-D: variable "cmd_ptr"  was declared but never referenced
-  	car_ctrl_cmd_t *cmd_ptr = (car_ctrl_cmd_t *)ptr;
-..\Core\Src\user_command.c: 6 warnings, 0 errors
-compiling ctrl_menu.c...
-compiling main.c...
-compiling motor_drive.c...
-compiling oled_i2c.c...
-..\Core\Src\oled_i2c.c(305): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
-  	  OLED_ShowAscii( 0,0,data[i] ,strlen(data[i]) ,1  );
-..\Core\Src\oled_i2c.c: 1 warning, 0 errors
-compiling gpio.c...
-compiling uart_dma.c...
+../Core/Src/common.c(10): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+   10 | #include "uart_dma.h"
+      |          ^
+../Core/Inc\uart_dma.h(16): note: previous '#pragma pack' directive that modifies alignment is here
+   16 | #pragma pack(4)
+      |         ^
+1 warning generated.
 compiling common.c...
-compiling dma.c...
-compiling stm32f1xx_hal.c...
-compiling stm32f1xx_hal_gpio_ex.c...
-compiling stm32f1xx_hal_msp.c...
-compiling spi.c...
+assembling startup_stm32f103xe.s...
+../Core/Src/speed_encoder.c(72): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+   72 |                 sprintf( buf , "L:%d R:%d" , speed[0] , speed[1] );
+      |                          ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+../Core/Src/speed_encoder.c(75): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+   75 |                 sprintf( buf , "L:%d R:%d" , counter[0] , counter[1] );
+      |                          ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+2 warnings generated.
+compiling speed_encoder.c...
+compiling music.c...
+compiling main.c...
+../Core/Src/uart_dma.c(4): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+    4 | #include "uart_dma.h"
+      |          ^
+../Core/Inc\uart_dma.h(16): note: previous '#pragma pack' directive that modifies alignment is here
+   16 | #pragma pack(4)
+      |         ^
+1 warning generated.
+compiling uart_dma.c...
+compiling led_show.c...
+../Core/Src/ultrasonicwave.c(105): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  105 |                 if ( g_ultrawave_data[i].distance < 100 ) sprintf( buf , "%d: -- mm" , i );
+      |                                                                    ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+../Core/Src/ultrasonicwave.c(106): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  106 |                 else sprintf( buf , "%d: %4.1f mm" , i , g_ultrawave_data[i].distance/100.0 );
+      |                               ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+2 warnings generated.
+compiling ultrasonicwave.c...
+compiling motor_drive.c...
+../Core/Src/user_command.c(1): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+    1 | #include "user_command.h"
+      |          ^
+../Core/Inc\user_command.h(10): note: previous '#pragma pack' directive that modifies alignment is here
+   10 | #pragma pack(4)
+      |         ^
+../Core/Src/user_command.c(143): warning: passing 'const uint8_t *' (aka 'const unsigned char *') to parameter of type 'const char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  143 |                 if(strncasecmp((const uint8_t *)g_CarCtrlCmd[i].cmd, (const char *)buf, strlen((const char *)g_CarCtrlCmd[i].cmd)) == 0)
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\string.h(149): note: passing argument to parameter here
+  149 | extern _ARMABI int strncasecmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+../Core/Src/user_command.c(260): warning: passing 'uint8_t *' (aka 'unsigned char *') to parameter of type 'const char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  260 |         if (strcasecmp( buf , "ID" ) == 0 )
+      |                         ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\string.h(141): note: passing argument to parameter here
+  141 | extern _ARMABI int strcasecmp(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+      |                                                  ^
+3 warnings generated.
+compiling user_command.c...
+../Core/Src/car_control.c(1): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+    1 | #include "car_control.h"
+      |          ^
+../Core/Inc\car_control.h(21): note: previous '#pragma pack' directive that modifies alignment is here
+   21 | #pragma pack(4)
+      |         ^
+../Core/Src/car_control.c(229): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  229 |                 sprintf( buf , "L:%d R:%d" , speed[0] , speed[1] );
+      |                          ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+../Core/Src/car_control.c(232): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  232 |                 sprintf( buf , "L:%d R:%d" , pwm[0] , pwm[1] );
+      |                          ^~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdio.h(417): note: passing argument to parameter here
+  417 | extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+      |                                                   ^
+3 warnings generated.
+compiling car_control.c...
+../Core/Src/ctrl_menu.c(8): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+    8 | #include "car_control.h"
+      |          ^
+../Core/Inc\car_control.h(21): note: previous '#pragma pack' directive that modifies alignment is here
+   21 | #pragma pack(4)
+      |         ^
+../Core/Src/ctrl_menu.c(121): warning: passing 'char[1]' to parameter of type 'const uint8_t *' (aka 'const unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  121 |                 OLED_ShowAscii( j,0,"" , 16 , 0  );
+      |                                     ^~
+../Core/Inc\oled_i2c.h(17): note: passing argument to parameter 'data' here
+   17 | void OLED_ShowAscii( uint8_t row , uint8_t col , const uint8_t * data , uint8_t length , uint8_t inv );
+      |                                                                  ^
+2 warnings generated.
+compiling ctrl_menu.c...
+../Core/Src/oled_i2c.c(305): warning: passing 'uint8_t[17]' (aka 'unsigned char[17]') to parameter of type 'const char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  305 |           OLED_ShowAscii( 0,0,data[i] ,strlen(data[i]) ,1  );
+      |                                               ^~~~~~~
+C:\Users\yinzh\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\string.h(335): note: passing argument to parameter here
+  335 | extern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
+      |                                                ^
+1 warning generated.
+compiling oled_i2c.c...
+compiling gpio.c...
 compiling adc.c...
+compiling dma.c...
 compiling i2c.c...
-compiling stm32f1xx_it.c...
-compiling scope.c...
-scope.c(51): warning:  #1-D: last line of file ends without a newline
-  }
-scope.c: 1 warning, 0 errors
-compiling tim.c...
-compiling stm32f1xx_hal_adc_ex.c...
+compiling spi.c...
 compiling usart.c...
-compiling stm32f1xx_hal_adc.c...
+compiling tim.c...
+compiling stm32f1xx_hal_msp.c...
+../Core/Src/stm32f1xx_it.c(25): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+   25 | #include "uart_dma.h"
+      |          ^
+../Core/Inc\uart_dma.h(16): note: previous '#pragma pack' directive that modifies alignment is here
+   16 | #pragma pack(4)
+      |         ^
+1 warning generated.
+compiling stm32f1xx_it.c...
+scope.c(2): warning: the current #pragma pack alignment value is modified in the included file [-Wpragma-pack]
+    2 | #include "uart_dma.h" // <D2><FD><D3><C3><C4><FA><CF><EE>Ä¿<D7>Ô¼<BA><B5><C4>UART DMAÍ·<CE>Ä¼<FE>
+      |          ^
+../Core/Inc\uart_dma.h(16): note: previous '#pragma pack' directive that modifies alignment is here
+   16 | #pragma pack(4)
+      |         ^
+1 warning generated.
+compiling scope.c...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling stm32f1xx_hal.c...
 compiling stm32f1xx_hal_rcc_ex.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_adc.c...
 compiling stm32f1xx_hal_cortex.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling stm32f1xx_hal_adc_ex.c...
+compiling stm32f1xx_hal_dma.c...
 compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_flash.c...
 compiling stm32f1xx_hal_flash_ex.c...
 compiling stm32f1xx_hal_exti.c...
-compiling stm32f1xx_hal_gpio.c...
-compiling stm32f1xx_hal_flash.c...
-compiling stm32f1xx_hal_rcc.c...
-compiling stm32f1xx_hal_dma.c...
-compiling stm32f1xx_hal_spi.c...
-compiling stm32f1xx_hal_tim_ex.c...
-compiling stm32f1xx_hal_i2c.c...
-compiling stm32f1xx_hal_tim.c...
 compiling system_stm32f1xx.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling stm32f1xx_hal_spi.c...
 compiling stm32f1xx_hal_uart.c...
+compiling stm32f1xx_hal_tim.c...
+compiling stm32f1xx_hal_i2c.c...
 linking...
-Program Size: Code=26424 RO-data=3552 RW-data=560 ZI-data=3800  
+Program Size: Code=34164 RO-data=3516 RW-data=636 ZI-data=3876  
 FromELF: creating hex file...
 "car2025_final\car2025_final.axf" - 0 Error(s), 17 Warning(s).
 
@@ -119,25 +193,25 @@ FromELF: creating hex file...
 
 Package Vendor: ARM
                 https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
-                ARM.CMSIS.6.1.0
+                ARM::CMSIS@6.1.0
                 CMSIS (Common Microcontroller Software Interface Standard)
    * Component: CORE Version: 6.1.0
 
 Package Vendor: Keil
                 https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
-                Keil.STM32F1xx_DFP.2.4.1
+                Keil::STM32F1xx_DFP@2.4.1
                 STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
   ./RTE/_car2025_final
-  E:/keil pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include
-  E:/keil pack/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+  C:/Users/yinzh/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  C:/Users/yinzh/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:6.1.0
+   * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:09
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

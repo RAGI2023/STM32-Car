@@ -17,6 +17,7 @@ const menu_define_t g_menu[] = {
 	{"Car Start", 	&CarCtrl_Start, 			  	1, 0, 0},
 	{"Car Stop",		&CarCtrl_Stop,  					1, 0, 1},
 	{"Return", 			&Ctrl_Menu_Return, 				1, 0, 2},
+	{"Super Start", &CarCtrl_SuperStart,             1, 0, 3},
 
 	///////////////////////////////////
 	{"Straight", 		&CarCtrl_Straight, 				1, 1, 0},
