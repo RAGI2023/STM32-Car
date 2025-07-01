@@ -5,8 +5,14 @@
 #include "oled_i2c.h"
 #include "ctrl_menu.h"
 #include "scope.h"
-#define diff_speed 0
+#include <stdio.h>
+#include <string.h>
 
+#define diff_speed 0
+#define DIS_THRESH 45000
+
+uint8_t avoid_step = 0;
+uint8_t AVOIDING = 0;
 __IO CarCtrl_State_TypeDef g_car_ctrl_state = CarCtrl_STOP ;
 
 car_config_t g_CarConfig = 
@@ -18,22 +24,30 @@ car_config_t g_CarConfig =
 car_ctrl_t 	g_CarCtrl;
 
 car_plan_t* g_CarPlan_Ptr;
-const int16_t straight_angle = 2;
+const int16_t straight_angle = 0;
 const uint8_t steer_limit = 90;
+
+car_plan_t car_plan_avoid[] =
+{
+	{0, {-500, -500}, 0, 40}, // 后退
+	{45 + straight_angle, {-500, 500}, 0, 160}, // 掉头
+	{0, {500, 500}, 0, 80},
+	{-45 + straight_angle, {500, -500}, 0, 190}, // 回正
+};
+
 car_plan_t g_CarPlan_Base[] =
 {
 
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
-	{ straight_angle  , { 1100 ,1100} , 0 , 160 } ,  	// run 2s with 500mm/s speed straightly 1m
-	{ 55+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
-	{ straight_angle  , { 1100 ,1100} , 0 , 15} ,
-	{ 55+straight_angle  , { 1100 , 1100} , 0 , 75 } ,
-	//{ 50+straight_angle  , { 800 , 800} , 0 , 185 } ,	// turn right 1.1s 
+	{ straight_angle  , { 500 ,500} , 0 , 260 } ,  	// run 2s with 500mm/s speed straightly 1m
+	//{ 55+straight_angle  , { 500 , 500} , 0 , 80 } ,
+	//{ straight_angle  , { 500 ,500} , 0 , 15} ,
+	//{ 55+straight_angle  , { 500 , 500} , 0 , 75 } ,
 	
-	{ straight_angle  , { 1100 , 1100} , 0 , 70 } ,		// run 1.5s with 500mm/s speed straightly
-		{ 55+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
-		{ straight_angle  , { 1100 , 1100} , 0 , 18} ,
+	//{ straight_angle  , { 500 , 500} , 0 , 70 } ,		// run 1.5s with 500mm/s speed straightly
+	//	{ 55+straight_angle  , { 500 , 500} , 0 , 80 } ,
+	//	{ straight_angle  , { 500 , 500} , 0 , 18} ,
 	//{ 45+straight_angle  , { 500 , 500} , 0 , 185 } ,
 	//{ straight_angle  , { 500 , 500} , 0 , 150 },
 	//{ -55  , { 500 , 500} , 0 , 360 } ,   // turn right 1.1s 
@@ -169,39 +183,75 @@ void CarCtrl_Speed_PID( )
 
 void CarCtrl_PlanSet( void )
 {
-	car_plan_t* car_plan_ptr ;
-	
-	car_plan_ptr = g_CarPlan_Ptr+g_CarCtrl.run_step ;
-	
-	if ( car_plan_ptr->run_time_set == 0 )
-	{
-		g_car_ctrl_state = CarCtrl_STOP;
-		Steer_Moto_Ctrl(STEER_MOTO_POS ,car_plan_ptr->car_angle_set);
-		for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
-			Drive_Moto_Ctrl( i , 0);
-		memset( &g_CarCtrl , 0 , sizeof(g_CarCtrl) );
-		return ;
-	}
-	
-	if ( g_CarCtrl.run_time == 0 )  // load plan 
-	{
-		g_CarCtrl.run_time ++ ;
-		for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
-			g_CarCtrl.car_speed_set[i] = car_plan_ptr->car_speed_set[i] ;
-		Steer_Moto_Ctrl(STEER_MOTO_POS , car_plan_ptr->car_angle_set );		
-	}
-	else														// execute plan 
-	{
-		g_CarCtrl.run_time ++ ;
-		if ( g_CarCtrl.run_time == car_plan_ptr->run_time_set || 								// plan over
-			   g_ultrawave_data[0].distance < car_plan_ptr->front_distance_set )   // distance too close
-		{
-			g_CarCtrl.run_time = 0 ;
-			g_CarCtrl.run_step ++ ;			
-		}
-	}
-}
+    car_plan_t* car_plan_ptr ;
 
+    if (AVOIDING){
+        // 修复1: 使用 >= 防止数组越界
+        if (avoid_step >= sizeof(car_plan_avoid) / sizeof(car_plan_t)){
+            avoid_step = 0;
+            AVOIDING = 0;
+            // 修复2: 避障结束后，需要重新开始当前正常路径段
+            g_CarCtrl.run_time = 0;
+            printf("Avoid finished! Return to normal path\n");
+        }
+        
+        if (AVOIDING) {  // 确保还在避障模式
+            car_plan_ptr = car_plan_avoid + avoid_step;
+        } else {
+            car_plan_ptr = g_CarPlan_Ptr + g_CarCtrl.run_step;
+        }
+    }else{
+        car_plan_ptr = g_CarPlan_Ptr + g_CarCtrl.run_step ;
+    }
+    
+    if ( car_plan_ptr->run_time_set == 0 )
+    {
+        g_car_ctrl_state = CarCtrl_STOP;
+        Steer_Moto_Ctrl(STEER_MOTO_POS ,car_plan_ptr->car_angle_set);
+        for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
+            Drive_Moto_Ctrl( i , 0);
+        memset( &g_CarCtrl , 0 , sizeof(g_CarCtrl) );
+        return ;
+    }
+    
+    if ( g_CarCtrl.run_time == 0 )  // load plan 
+    {
+        g_CarCtrl.run_time ++ ;
+        for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
+            g_CarCtrl.car_speed_set[i] = car_plan_ptr->car_speed_set[i] ;
+        Steer_Moto_Ctrl(STEER_MOTO_POS , car_plan_ptr->car_angle_set );
+        
+        printf("Load plan: AVOIDING=%d, avoid_step=%d, run_step=%d, angle=%d, speed=[%d,%d], time=%d\n", 
+               AVOIDING, avoid_step, g_CarCtrl.run_step, 
+               car_plan_ptr->car_angle_set,
+               car_plan_ptr->car_speed_set[0], car_plan_ptr->car_speed_set[1],
+               car_plan_ptr->run_time_set);
+    }
+    else // execute plan 
+    {
+        g_CarCtrl.run_time ++ ;
+        
+        if (g_CarCtrl.run_time >= car_plan_ptr->run_time_set)
+        {
+            g_CarCtrl.run_time = 0 ;
+            if (AVOIDING){
+                avoid_step ++;
+                printf("Avoid step updated: %d -> %d\n", avoid_step-1, avoid_step);
+            }else{
+                g_CarCtrl.run_step ++ ;
+                printf("Normal step updated: %d -> %d\n", g_CarCtrl.run_step-1, g_CarCtrl.run_step);
+            }
+        }
+
+        // 修复3: 关键修复 - 避障触发时重置avoid_step
+        if (!AVOIDING && g_ultrawave_data[0].distance < DIS_THRESH){
+            printf("Obstacle detected! distance=%d, triggering avoidance\n", g_ultrawave_data[0].distance);
+            AVOIDING = 1;
+            avoid_step = 0;              // 🔥 关键修复：重置避障步骤
+            g_CarCtrl.run_time = 0;      // 重置计时器，立即开始避障第一步
+        }
+    }
+}
 
 void CarCtrl_Show( void ) 
 {
@@ -251,26 +301,27 @@ void CarCtrl_Process( void )
 	if ( g_car_ctrl_state == CarCtrl_START ) 
 	{
 		g_car_ctrl_state = CarCtrl_IDLE ;
-		Speed_Calculate();
+		Speed_Calculate(); //获取实际速度
 		CarCtrl_Speed_PID();
 	
 		scope_send_counter++;
 		if (scope_send_counter >= 10) // ����10Hz�ķ���Ƶ��
 		{
 			scope_send_counter = 0;
-			
+			printf("Now status :%d, step = %d\n", AVOIDING, avoid_step);
             // ======================================================================
             // == �޸Ĳ��֣������ĸ�ͨ��������
             // ======================================================================
-			Scope_Send4Floats(
-                (float)g_CarCtrl.car_speed_set[0],  // ͨ��1: ����Ŀ���ٶ�
-                (float)g_speed_encoder[0].speed,    // ͨ��2: ����ʵ���ٶ�
-                (float)g_ultrawave_data[0].distance / 1000.0,  // ͨ��3: ����Ŀ���ٶ�
-                (float)g_ultrawave_data[1].distance / 1000.0    // ͨ��4: ����ʵ���ٶ�
-            );
+			// Scope_Send4Floats(
+      //           (float)g_CarCtrl.car_speed_set[0],  // ͨ��1: ����Ŀ���ٶ�
+      //           (float)g_speed_encoder[0].speed,    // ͨ��2: ����ʵ���ٶ�
+      //           (float)g_ultrawave_data[0].distance / 1000.0,  // ͨ��3: ����Ŀ���ٶ�
+      //          (float)g_ultrawave_data[1].distance / 1000.0    // ͨ��4: ����ʵ���ٶ�
+      //       );
             // ======================================================================
 		}
 		
 		CarCtrl_PlanSet();
+		//printf("yz\n");
 	}
 }

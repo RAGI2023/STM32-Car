@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "speed_encoder.h": "c",
+        "motor_drive.h": "c",
+        "car_control.h": "c",
+        "stdio.h": "c",
+        "ultrasonicwave.h": "c",
+        "main.h": "c"
+    }
+}

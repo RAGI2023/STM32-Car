@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "motor_drive.h": "c",
-        "car_control.h": "c"
+        "car_control.h": "c",
+        "speed_encoder.h": "c"
     }
 }

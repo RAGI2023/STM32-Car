@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${default}",
+                "C:\\Users\\yinzh\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include\\libcxx",
+                "C:\\Users\\yinzh\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\include",
+                "D:\\codes\\keil\\car2025_final\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "D:\\codes\\keil\\car2025_final\\Drivers\\CMSIS\\Include",
+                "D:\\codes\\keil\\car2025_final\\Core\\Inc",
+                "D:\\codes\\keil\\car2025_final\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "D:\\codes\\keil\\car2025_final\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "D:\\codes\\keil\\car2025_final\\MDK-ARM\\RTE\\_car2025_final",
+                "C:\\Users\\yinzh\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG/include",
+                "C:\\Users\\yinzh\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG/include/libcxx",
+                "${workspaceFolder}/MDK-ARM"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.26100.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
