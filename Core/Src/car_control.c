@@ -5,6 +5,7 @@
 #include "oled_i2c.h"
 #include "ctrl_menu.h"
 #include "scope.h"
+#define diff_speed 0
 
 __IO CarCtrl_State_TypeDef g_car_ctrl_state = CarCtrl_STOP ;
 
@@ -17,7 +18,7 @@ car_config_t g_CarConfig =
 car_ctrl_t 	g_CarCtrl;
 
 car_plan_t* g_CarPlan_Ptr;
-const int16_t straight_angle = -4;
+const int16_t straight_angle = 2;
 const uint8_t steer_limit = 90;
 car_plan_t g_CarPlan_Base[] =
 {
@@ -25,13 +26,13 @@ car_plan_t g_CarPlan_Base[] =
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
 	{ straight_angle  , { 1100 ,1100} , 0 , 160 } ,  	// run 2s with 500mm/s speed straightly 1m
-	{ 50+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
+	{ 55+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
 	{ straight_angle  , { 1100 ,1100} , 0 , 15} ,
-	{ 50+straight_angle  , { 1100 , 1100} , 0 , 75 } ,
+	{ 55+straight_angle  , { 1100 , 1100} , 0 , 75 } ,
 	//{ 50+straight_angle  , { 800 , 800} , 0 , 185 } ,	// turn right 1.1s 
 	
 	{ straight_angle  , { 1100 , 1100} , 0 , 70 } ,		// run 1.5s with 500mm/s speed straightly
-		{ 50+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
+		{ 55+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
 		{ straight_angle  , { 1100 , 1100} , 0 , 18} ,
 	//{ 45+straight_angle  , { 500 , 500} , 0 , 185 } ,
 	//{ straight_angle  , { 500 , 500} , 0 , 150 },
