@@ -17,11 +17,11 @@ car_config_t g_CarConfig =
 car_ctrl_t 	g_CarCtrl;
 
 car_plan_t* g_CarPlan_Ptr;
-const int16_t straight_angle = -3;
+const int16_t straight_angle = -4;
 const uint8_t steer_limit = 90;
 car_plan_t g_CarPlan_Base[] =
 {
-	//{ 55  , { 0 , 0} , 0 , 100 } ,   		// test steer moto
+
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
 	{ straight_angle  , { 1100 ,1100} , 0 , 160 } ,  	// run 2s with 500mm/s speed straightly 1m
@@ -47,22 +47,16 @@ car_plan_t g_CarPlan_Base[] =
 car_plan_t g_CarPlan_Supper1[] =
 {
 	
-	{ straight_angle  , { 1100 , 1100} , 50000 , 100 } ,  	// run 20s with 50mm/s speed straightly or block less than 200mm
-	{ 55 + straight_angle , { 1100 , 1100} , 0 , 80 } ,		// turn right 1.1s 
+	{ straight_angle  , { 1100 , 1100} , 55000 , 2000 } ,  	// run 20s with 50mm/s speed straightly or block less than 200mm
+	{ 55 + straight_angle , { 1100 , 1100} , 0 , 45 } ,		// turn right 1.1s 
 	
-	{ straight_angle  , { 1100 , 1100} , 0 , 10 } ,		// run 1s with 50mm/s speed straightly
-	{ -55 + straight_angle  , { 1100 ,  1100} , 0 , 80 } ,		// run 1s with 50mm/s speed straightly
-	{ 80  , { 200 , 400} , 0 , 150 } ,   // turn left 1.1s 
-	
-	{ 17  , { 100 , 100} , 0 , 30 } ,		// run 1s with 50mm/s speed straightly
-	{ 80  , { 200 , 400} , 0 , 150 } ,		// turn left 1.1s 
-	
-	{ 17  , { 100 , 100} , 0 , 30 } ,		// run 1s with 50mm/s speed straightly
-	{ 17  , { 0 ,  0} , 0 , 100 } ,		// run 1s with 50mm/s speed straightly
-	{ -55  , { 500 , 500} , 0 , 110 } ,		// turn right 1.1s 
-	
-	{ 17  , { 500 , 500} , 0 , 100 } ,		// run 1s with 50mm/s speed straightly
-	{ 17  , { 0   , 0  } , 0 , 0 } ,		// stop
+	//{ straight_angle  , { 1100 , 1100} , 0 , 10 } ,		// run 1s with 50mm/s speed straightly
+	{ -55 + straight_angle  , { 1100 ,  1100} , 0 , 130 } ,		// run 1s with 50mm/s speed straightly
+	//{ straight_angle  , { 500 , 500} , 0 , 20},
+	//{ -55 + straight_angle  , { 1100 , 1100} , 0 , 220},
+	{ 55 + straight_angle  , { 1100 , 1100}, 0 , 40},
+	{ straight_angle  , { 1100 , 1100} , 0 , 20},
+	{ straight_angle  , { 0   , 0  } , 0 , 0 } ,		// stop
 };
 
 
@@ -270,8 +264,8 @@ void CarCtrl_Process( void )
 			Scope_Send4Floats(
                 (float)g_CarCtrl.car_speed_set[0],  // ͨ��1: ����Ŀ���ٶ�
                 (float)g_speed_encoder[0].speed,    // ͨ��2: ����ʵ���ٶ�
-                (float)g_CarCtrl.car_speed_set[1],  // ͨ��3: ����Ŀ���ٶ�
-                (float)g_speed_encoder[1].speed     // ͨ��4: ����ʵ���ٶ�
+                (float)g_ultrawave_data[0].distance / 1000.0,  // ͨ��3: ����Ŀ���ٶ�
+                (float)g_ultrawave_data[1].distance / 1000.0    // ͨ��4: ����ʵ���ٶ�
             );
             // ======================================================================
 		}
