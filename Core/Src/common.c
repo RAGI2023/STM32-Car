@@ -155,7 +155,6 @@ void System_Init( void )
 	Ctrl_Menu_Init();
 	CarCtrl_Init();
 	System_Timer_Start();
-	Scope_SendNames("TargetSpeed,ActualSpeed");
 	printf("MCU Init OK!\n");
 }
 

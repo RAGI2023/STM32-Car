@@ -241,6 +241,7 @@ void CarCtrl_Show( void )
 
 // �� car_control.c ��
 
+// ...
 void CarCtrl_Process( void )
 {
 	static int scope_send_counter = 0;
@@ -253,14 +254,20 @@ void CarCtrl_Process( void )
 		CarCtrl_Speed_PID();
 	
 		scope_send_counter++;
-		if (scope_send_counter >= 10) // 100Hz / 10 = 10Hz ����Ƶ��
+		if (scope_send_counter >= 10) // ����10Hz�ķ���Ƶ��
 		{
 			scope_send_counter = 0;
 			
-			float scope_data[2];
-			scope_data[0] = (float)g_CarCtrl.car_speed_set[0];
-			scope_data[1] = (float)g_speed_encoder[0].speed;
-			Scope_SendData(scope_data, 2);
+            // ======================================================================
+            // == �޸Ĳ��֣������ĸ�ͨ��������
+            // ======================================================================
+			Scope_Send4Floats(
+                (float)g_CarCtrl.car_speed_set[0],  // ͨ��1: ����Ŀ���ٶ�
+                (float)g_speed_encoder[0].speed,    // ͨ��2: ����ʵ���ٶ�
+                (float)g_CarCtrl.car_speed_set[1],  // ͨ��3: ����Ŀ���ٶ�
+                (float)g_speed_encoder[1].speed     // ͨ��4: ����ʵ���ٶ�
+            );
+            // ======================================================================
 		}
 		
 		CarCtrl_PlanSet();
