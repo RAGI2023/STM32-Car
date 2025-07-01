@@ -17,22 +17,30 @@ car_config_t g_CarConfig =
 car_ctrl_t 	g_CarCtrl;
 
 car_plan_t* g_CarPlan_Ptr;
-
+const int16_t straight_angle = -5;
+const uint8_t steer_limit = 90;
 car_plan_t g_CarPlan_Base[] =
 {
 	//{ 55  , { 0 , 0} , 0 , 100 } ,   		// test steer moto
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
-	{ 0  , { 500 , 500} , 0 , 200 } ,  	// run 2s with 500mm/s speed straightly 1m
-	{ -55  , { 500 , 500} , 0 , 110 } ,		// turn right 1.1s 
+	{ straight_angle  , { 1100 ,1100} , 0 , 160 } ,  	// run 2s with 500mm/s speed straightly 1m
+	{ 50+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
+	{ straight_angle  , { 1100 ,1100} , 0 , 15} ,
+	{ 50+straight_angle  , { 1100 , 1100} , 0 , 75 } ,
+	//{ 50+straight_angle  , { 800 , 800} , 0 , 185 } ,	// turn right 1.1s 
 	
-	{ 0  , { 500 , 500} , 0 , 150 } ,		// run 1.5s with 500mm/s speed straightly
-	{ -55  , { 500 , 500} , 0 , 110 } ,   // turn right 1.1s 
+	{ straight_angle  , { 1100 , 1100} , 0 , 70 } ,		// run 1.5s with 500mm/s speed straightly
+		{ 50+straight_angle  , { 1100 , 1100} , 0 , 80 } ,
+		{ straight_angle  , { 1100 , 1100} , 0 , 18} ,
+	//{ 45+straight_angle  , { 500 , 500} , 0 , 185 } ,
+	//{ straight_angle  , { 500 , 500} , 0 , 150 },
+	//{ -55  , { 500 , 500} , 0 , 360 } ,   // turn right 1.1s 
 	
-	{ 0  , { 500 , 500} , 0 , 120 } ,		// run 1.2s with 500mm/s speed straightly
-	{ -55  , { 500 , 500} , 0 , 135 } ,		// turn right 1.35s 
+	//{ straight_angle  , { 500 , 500} , 0 , 120 } ,		// run 1.2s with 500mm/s speed straightly
+	//{ -55  , { 500 , 500} , 0 , 360 } ,		// turn right 1.35s 
 	
-	{ 0  , { 500 , 500} , 0 , 180 } ,		// run 1.8s with 500mm/s speed straightly
+	//{ straight_angle  , { 500 , 500} , 0 , 180 } ,		// run 1.8s with 500mm/s speed straightly
 	{ 0  , { 0   , 0  } , 0 , 0 } ,		// stop
 };
 
@@ -120,14 +128,14 @@ void CarCtrl_Straight( void )
 void CarCtrl_Right( void )
 {
 	g_CarCtrl.car_angle -- ;
-	if ( g_CarCtrl.car_angle < -45 ) g_CarCtrl.car_angle = -45 ;
+	if ( g_CarCtrl.car_angle < -steer_limit ) g_CarCtrl.car_angle = -steer_limit ;
 	Steer_Moto_Ctrl(STEER_MOTO_POS , g_CarCtrl.car_angle );
 }
 
 void CarCtrl_Left( void )
 {
 	g_CarCtrl.car_angle ++ ;
-	if ( g_CarCtrl.car_angle > 45 ) g_CarCtrl.car_angle = 45 ;
+	if ( g_CarCtrl.car_angle > steer_limit ) g_CarCtrl.car_angle = steer_limit ;
 	Steer_Moto_Ctrl(STEER_MOTO_POS , g_CarCtrl.car_angle );
 }
 
