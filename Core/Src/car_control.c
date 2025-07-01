@@ -235,6 +235,7 @@ void CarCtrl_Show( void )
 
 // 在 car_control.c 中
 
+// ...
 void CarCtrl_Process( void )
 {
 	static int scope_send_counter = 0;
@@ -247,14 +248,20 @@ void CarCtrl_Process( void )
 		CarCtrl_Speed_PID();
 	
 		scope_send_counter++;
-		if (scope_send_counter >= 10) // 100Hz / 10 = 10Hz 发送频率
+		if (scope_send_counter >= 10) // 保持10Hz的发送频率
 		{
 			scope_send_counter = 0;
 			
-			float scope_data[2];
-			scope_data[0] = (float)g_CarCtrl.car_speed_set[0];
-			scope_data[1] = (float)g_speed_encoder[0].speed;
-			Scope_SendData(scope_data, 2);
+            // ======================================================================
+            // == 修改部分：填满四个通道的数据
+            // ======================================================================
+			Scope_Send4Floats(
+                (float)g_CarCtrl.car_speed_set[0],  // 通道1: 左轮目标速度
+                (float)g_speed_encoder[0].speed,    // 通道2: 左轮实际速度
+                (float)g_CarCtrl.car_speed_set[1],  // 通道3: 右轮目标速度
+                (float)g_speed_encoder[1].speed     // 通道4: 右轮实际速度
+            );
+            // ======================================================================
 		}
 		
 		CarCtrl_PlanSet();

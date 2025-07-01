@@ -1,7 +1,7 @@
 Dependencies for Project 'car2025_final', Target 'car2025_final': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\v5
 F (startup_stm32f103xe.s)(0x6858FEF2)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xe.lst --xref -o car2025_final\startup_stm32f103xe.o --depend car2025_final\startup_stm32f103xe.d)
-F (..\Core\Src\common.c)(0x686224E2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\common.o --omf_browse car2025_final\common.crf --depend car2025_final\common.d)
+F (..\Core\Src\common.c)(0x68632F82)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\common.o --omf_browse car2025_final\common.crf --depend car2025_final\common.d)
 I (E:\keil\ARM\v5\include\stdio.h)(0x5E8E3CC2)
 I (E:\keil\ARM\v5\include\string.h)(0x5E8E3CC2)
 I (../Core/Inc/main.h)(0x6831D75C)
@@ -52,7 +52,7 @@ I (../Core/Inc/UltrasonicWave.h)(0x68593580)
 I (../Core/Inc/car_control.h)(0x686110C4)
 I (../Core/Inc/ctrl_menu.h)(0x67DB0BEC)
 I (../Core/Inc/led_show.h)(0x68582150)
-I (..\MDK-ARM\scope.h)(0x68621C90)
+I (..\MDK-ARM\scope.h)(0x68632F82)
 F (..\Core\Src\motor_drive.c)(0x68611F44)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\motor_drive.o --omf_browse car2025_final\motor_drive.crf --depend car2025_final\motor_drive.d)
 I (../Core/Inc/motor_drive.h)(0x684A6C4C)
 I (E:\keil\ARM\v5\include\stdio.h)(0x5E8E3CC2)
@@ -240,7 +240,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x67ADD84E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x67ADD84E)
 I (../Core/Inc/uart_dma.h)(0x678FD406)
 I (../Core/Inc/common.h)(0x6857B556)
-F (..\Core\Src\car_control.c)(0x686222F3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\car_control.o --omf_browse car2025_final\car_control.crf --depend car2025_final\car_control.d)
+F (..\Core\Src\car_control.c)(0x68632F82)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\car_control.o --omf_browse car2025_final\car_control.crf --depend car2025_final\car_control.d)
 I (../Core/Inc/car_control.h)(0x686110C4)
 I (E:\keil\ARM\v5\include\stdio.h)(0x5E8E3CC2)
 I (E:\keil\ARM\v5\include\stdint.h)(0x5E8E3CC2)
@@ -283,7 +283,7 @@ I (../Core/Inc/speed_encoder.h)(0x68610E34)
 I (../Core/Inc/UltrasonicWave.h)(0x68593580)
 I (../Core/Inc/oled_i2c.h)(0x67DA8634)
 I (../Core/Inc/ctrl_menu.h)(0x67DB0BEC)
-I (..\MDK-ARM\scope.h)(0x68621C90)
+I (..\MDK-ARM\scope.h)(0x68632F82)
 F (..\Core\Src\ctrl_menu.c)(0x6858F248)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\ctrl_menu.o --omf_browse car2025_final\ctrl_menu.crf --depend car2025_final\ctrl_menu.d)
 I (E:\keil\ARM\v5\include\stdio.h)(0x5E8E3CC2)
 I (E:\keil\ARM\v5\include\string.h)(0x5E8E3CC2)
@@ -789,8 +789,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x67ADD84E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x67ADD84E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x67ADD84E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x67ADD84E)
-F (.\scope.c)(0x68621E44)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\scope.o --omf_browse car2025_final\scope.crf --depend car2025_final\scope.d)
-I (scope.h)(0x68621C90)
+F (.\scope.c)(0x68632F82)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\scope.o --omf_browse car2025_final\scope.crf --depend car2025_final\scope.d)
+I (scope.h)(0x68632F82)
 I (../Core/Inc/main.h)(0x6831D75C)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x67ADD84E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x68411F78)
@@ -826,7 +826,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x67ADD84E)
 I (../Core/Inc/uart_dma.h)(0x678FD406)
 I (../Core/Inc/common.h)(0x6857B556)
 I (E:\keil\ARM\v5\include\string.h)(0x5E8E3CC2)
-F (.\scope.h)(0x68621C90)()
+I (E:\keil\ARM\v5\include\stdio.h)(0x5E8E3CC2)
+F (.\scope.h)(0x68632F82)()
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c)(0x67ADD84E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\MDK-ARM-I.\RTE\_car2025_final-I"E:\keil pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include"-I"E:\keil pack\Keil\STM32F1xx_DFP\2.4.1\Device\Include"-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o car2025_final\stm32f1xx_hal_gpio_ex.o --omf_browse car2025_final\stm32f1xx_hal_gpio_ex.crf --depend car2025_final\stm32f1xx_hal_gpio_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x67ADD84E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x68411F78)

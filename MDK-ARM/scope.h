@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void Scope_SendNames(const char* names);
-void Scope_SendData(float* data, uint8_t num_channels);
+// 函数声明：发送4个浮点数通道
+void Scope_Send4Floats(float ch1, float ch2, float ch3, float ch4);
 
 #endif /* __SCOPE_H */

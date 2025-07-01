@@ -36,3 +36,4 @@ car2025_final\scope.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 car2025_final\scope.o: ../Core/Inc/uart_dma.h
 car2025_final\scope.o: ../Core/Inc/common.h
 car2025_final\scope.o: E:\keil\ARM\v5\Bin\..\include\string.h
+car2025_final\scope.o: E:\keil\ARM\v5\Bin\..\include\stdio.h
