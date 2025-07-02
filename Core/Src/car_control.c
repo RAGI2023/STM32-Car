@@ -47,8 +47,8 @@ car_plan_t car_plan_avoid[] =
 	
 	
 	{0, {500, 500}, 0, 110}, 
-	{55 + straight_angle, {-500, 500}, 0, 130}, // Head Forward 10 Head Forward
-	{straight_angle, {0, 0}, 0, 20},
+	{55 + straight_angle, {-500, 500}, 0, 120}, // Head Forward 10 Head Forward
+	{straight_angle, {0, 0}, 0, 10},
 };
 
 car_plan_t g_CarPlan_Base[] =
@@ -56,8 +56,8 @@ car_plan_t g_CarPlan_Base[] =
 
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
-	{ straight_angle  , { 500 ,500} , 0 , 260 } ,  	// run 2s with 500mm/s speed straightly 1m
-	{ straight_angle  , { 500 ,500} , 0 , 360 } ,
+	{ straight_angle  , { 500 ,500} , 0 , 500 } ,  	// run 2s with 500mm/s speed straightly 1m
+	//{ straight_angle  , { 500 ,500} , 0 , 360 } ,
 	//{ 55+straight_angle  , { 500 , 500} , 0 , 80 } ,
 	//{ straight_angle  , { 500 ,500} , 0 , 15} ,
 	//{ 55+straight_angle  , { 500 , 500} , 0 , 75 } ,
@@ -84,8 +84,8 @@ car_plan_t g_CarPlan_Supper1[] =
 	
 	//{ straight_angle  , { 1100 , 1100} , 0 , 10 } ,		// run 1s with 50mm/s speed straightly
 	{ -55 + straight_angle  , { 1100 ,  1100} , 0 , 130 } ,		// run 1s with 50mm/s speed straightly
-	//{ straight_angle  , { 500 , 500} , 0 , 20},
-	//{ -55 + straight_angle  , { 1100 , 1100} , 0 , 220},
+	// { straight_angle  , { 500 , 500} , 0 , 20},
+	// { -55 + straight_angle  , { 1100 , 1100} , 0 , 220},
 	{ 55 + straight_angle  , { 1100 , 1100}, 0 , 40},
 	{ straight_angle  , { 1100 , 1100} , 0 , 20},
 	{ straight_angle  , { 0   , 0  } , 0 , 0 } ,		// stop
@@ -108,7 +108,8 @@ void CarCtrl_PlanSet( void )
             bypass_cycle_count = 0;  // ??????
             g_CarCtrl.run_time = prev_time_set;
             prev_time_set = 0;
-            printf("Avoid finished! Return to normal path\n");
+						
+            printf("Avoid finished! Return to normal path. step = %d %d\n", g_CarCtrl.run_step, g_CarCtrl.run_time);
         }
         
         if (AVOIDING) {
@@ -119,6 +120,7 @@ void CarCtrl_PlanSet( void )
     }else{
         car_plan_ptr = g_CarPlan_Ptr + g_CarCtrl.run_step ;
     }
+		
     
     if ( car_plan_ptr->run_time_set == 0 )
     {
@@ -176,7 +178,7 @@ void CarCtrl_PlanSet( void )
                         printf("Still barrier! Continue loop cycle %d (return to step 6)\n", bypass_cycle_count);
                     } else {
                         // ???,????????
-                        avoid_step++;  // ????Step 9 (straight)
+                        avoid_step++;  // Step 9 (straight)
                         printf("No barrier! Exit loop, continue to final straight (step %d)\n", avoid_step);
                     }
                 } else {
@@ -354,14 +356,14 @@ void CarCtrl_Process( void )
 	if ( g_car_ctrl_state == CarCtrl_START ) 
 	{
 		g_car_ctrl_state = CarCtrl_IDLE ;
-		Speed_Calculate(); //��ȡʵ���ٶ�
+		Speed_Calculate();
 		CarCtrl_Speed_PID();
 	
 		scope_send_counter++;
 		if (scope_send_counter >= 10) // ????10Hz????????
 		{
 			scope_send_counter = 0;
-			printf("Now status :%d, step = %d\n", AVOIDING, avoid_step);
+			printf("Now avoiding status :%d, avoid_step = %d\n", AVOIDING, avoid_step);
             // ======================================================================
             // == ???????????????????????
             // ======================================================================
@@ -375,6 +377,5 @@ void CarCtrl_Process( void )
 		}
 		
 		CarCtrl_PlanSet();
-		//printf("yz\n");
 	}
 }
