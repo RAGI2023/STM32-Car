@@ -8,6 +8,7 @@
 #include "car_control.h"
 #include "led_show.h"
 
+
 const menu_define_t g_menu[] = {
 	{"Car Control",	0, 0, 0, 0},
 	{"Steer Moto", 	0, 0, 0, 1},
@@ -18,6 +19,7 @@ const menu_define_t g_menu[] = {
 	{"Car Stop",		&CarCtrl_Stop,  					1, 0, 1},
 	{"Return", 			&Ctrl_Menu_Return, 				1, 0, 2},
 	{"Super Start1", &CarCtrl_SuperStart1,             1, 0, 3},
+	{"Super Start2", &CarCtrl_SuperStart2,             1, 0, 4},
 
 	///////////////////////////////////
 	{"Straight", 		&CarCtrl_Straight, 				1, 1, 0},

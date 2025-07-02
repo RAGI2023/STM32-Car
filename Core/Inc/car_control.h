@@ -43,6 +43,7 @@ typedef struct
 
 void CarCtrl_Start( void );
 void CarCtrl_SuperStart1(void);
+void CarCtrl_SuperStart2(void);
 void CarCtrl_Stop( void );
 
 

@@ -14,6 +14,7 @@
 #define BYPASS_DISTANCE_THRESH 45000  // ??????
 #define MAX_BYPASS_CYCLES 3           // ??????
 
+uint8_t g_mode3 = 0;
 uint8_t bypass_cycle_count = 0;       // ???????
 uint8_t avoid_step = 0;
 uint8_t AVOIDING = 0;
@@ -57,6 +58,7 @@ car_plan_t g_CarPlan_Base[] =
 	//{ -55  , { 0 , 0} , 0 , 100 } ,  		// test steer moto
 	
 	{ straight_angle  , { 500 ,500} , 0 , 500 } ,  	// run 2s with 500mm/s speed straightly 1m
+	{ straight_angle  , { 500 ,500} , 0 , 200},
 	//{ straight_angle  , { 500 ,500} , 0 , 360 } ,
 	//{ 55+straight_angle  , { 500 , 500} , 0 , 80 } ,
 	//{ straight_angle  , { 500 ,500} , 0 , 15} ,
@@ -92,6 +94,13 @@ car_plan_t g_CarPlan_Supper1[] =
 };
 
 
+car_plan_t g_CarPlan_Supper2[] = 
+{
+		{ straight_angle  , { 500 ,500} , 0 , 500 } ,  	// run 2s with 500mm/s speed straightly 1m
+	//{ straight_angle  , { 500 ,500} , 0 , 200},
+		{ 0  , { 0   , 0  } , 0 , 0 } ,	
+};
+
 /////////////////////////////////////////////////////////////////////////////////
 // Menu control
 //
@@ -99,6 +108,7 @@ car_plan_t g_CarPlan_Supper1[] =
 
 void CarCtrl_PlanSet( void )
 {
+	if (g_mode3){
     car_plan_t* car_plan_ptr ;
 
     if (AVOIDING){
@@ -202,6 +212,41 @@ void CarCtrl_PlanSet( void )
             g_CarCtrl.run_time = 0;
         }
     }
+		return ;
+	}
+	
+	//normal mode
+	car_plan_t* car_plan_ptr ;
+	
+	car_plan_ptr = g_CarPlan_Ptr+g_CarCtrl.run_step ;
+	
+	if ( car_plan_ptr->run_time_set == 0 )
+	{
+		g_car_ctrl_state = CarCtrl_STOP;
+		Steer_Moto_Ctrl(STEER_MOTO_POS ,car_plan_ptr->car_angle_set);
+		for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
+			Drive_Moto_Ctrl( i , 0);
+		memset( &g_CarCtrl , 0 , sizeof(g_CarCtrl) );
+		return ;
+	}
+	
+	if ( g_CarCtrl.run_time == 0 )  // load plan 
+	{
+		g_CarCtrl.run_time ++ ;
+		for( int32_t i = 0 ; i < DRIVE_MOTO_NUM ; i++)
+			g_CarCtrl.car_speed_set[i] = car_plan_ptr->car_speed_set[i] ;
+		Steer_Moto_Ctrl(STEER_MOTO_POS , car_plan_ptr->car_angle_set );		
+	}
+	else														// execute plan 
+	{
+		g_CarCtrl.run_time ++ ;
+		if ( g_CarCtrl.run_time == car_plan_ptr->run_time_set || 								// plan over
+			   g_ultrawave_data[0].distance < car_plan_ptr->front_distance_set )   // distance too close
+		{
+			g_CarCtrl.run_time = 0 ;
+			g_CarCtrl.run_step ++ ;			
+		}
+	}
 }
 
 void CarCtrl_Start( void )
@@ -213,6 +258,13 @@ void CarCtrl_SuperStart1(void)
 {
 	g_car_ctrl_state = CarCtrl_IDLE ;
 	g_CarPlan_Ptr = g_CarPlan_Supper1;
+}
+
+void CarCtrl_SuperStart2(void)
+{
+	g_car_ctrl_state = CarCtrl_IDLE ;
+	g_CarPlan_Ptr = g_CarPlan_Supper2;
+	g_mode3 = 1;
 }
 
 void CarCtrl_Stop( void )
